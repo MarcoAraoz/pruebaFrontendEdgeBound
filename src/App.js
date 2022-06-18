@@ -3,11 +3,10 @@ import "./App.css";
 import Header from "./components/Header";
 import SearchPokemon from "./components/SearchPokemon"
 import PokeInfo from "./components/PokeInfo"
-import { getPokemonData, getPokemons, searchPokemon } from "./api";
+import { getPokemonData, getPokemons, searchPokemon } from "../src/api";
 import { FavoriteProvider } from "./contexts/favoritesContext";
 import Footer from "./components/Footer";
-
-const { useState, useEffect } = React;
+import { useState, useEffect } from 'react'
 
 const localStorageKey = "favorite_pokemon";
 
@@ -19,7 +18,7 @@ function App() {
   const [favorites, setFavorites] = useState([]);
   const [notFound, setNotFound] = useState(false);
   const [searching, setSearching] = useState(false);
-
+  
   const fetchPokemons = async () => {
     try {
       setLoading(true);
@@ -34,23 +33,24 @@ function App() {
       setNotFound(false);
     } catch (err) {}
   };
-
+  
   const loadFavoritePokemons = () => {
     const pokemons =
-      JSON.parse(window.localStorage.getItem(localStorageKey)) || [];
+    JSON.parse(window.localStorage.getItem(localStorageKey)) || [];
     setFavorites(pokemons);
   };
-
+  
   useEffect(() => {
     loadFavoritePokemons();
   }, []);
-
+  
   useEffect(() => {
     if (!searching) {
       fetchPokemons();
     }
-  }, [page]);
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[page]);
+  
   const updateFavoritePokemons = (name) => {
     const updated = [...favorites];
     const isFavorite = updated.indexOf(name);
@@ -62,7 +62,7 @@ function App() {
     setFavorites(updated);
     window.localStorage.setItem(localStorageKey, JSON.stringify(updated));
   };
-
+  
   const onSearch = async (pokemon) => {
     if (!pokemon) {
       return fetchPokemons();
@@ -86,11 +86,11 @@ function App() {
 
   return (
     <FavoriteProvider
-      value={{
+    value={{
         favoritePokemons: favorites,
         updateFavoritePokemons: updateFavoritePokemons
       }}
-    >
+      >
       <div>
         <Header />
         <div className="App">

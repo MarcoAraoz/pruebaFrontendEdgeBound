@@ -1,10 +1,11 @@
-import React from "react";
+//Eliminar todo este archivo js
+// import React from "react";
 
-const FavoriteContext = React.createContext({
-  favoritePokemons: [],
-  updateFavoritePokemons: (id) => null
-});
+// const FavoriteContext = React.createContext({
+//   favoritePokemons: [],
+//   updateFavoritePokemons: (id) => null
+// });
 
-export const FavoriteProvider = FavoriteContext.Provider;
+// export const FavoriteProvider = FavoriteContext.Provider;
 
-export default FavoriteContext;
+// export default FavoriteContext;
